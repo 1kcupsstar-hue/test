@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Anime Quiz Live</title><link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="brand">✦ ANIME QUIZ <span>LIVE</span></div><div class="tag">MULTIPLAYER TRIVIA ROOM</div></header>
+<main>
+<section id="entry" class="panel">
+  <h1>Play together.<br><em>Prove your anime knowledge.</em></h1>
+  <p class="muted">Create a room as the host, or join a live game with a room code.</p>
+  <div class="entry-grid">
+    <div class="subpanel"><h2>Host a game</h2><label>YouTube quiz video URL</label><input id="videoUrl" placeholder="https://www.youtube.com/watch?v=..."><button id="createBtn">Create room</button></div>
+    <div class="subpanel"><h2>Join a game</h2><label>Your display name</label><input id="playerName" placeholder="e.g. GojoFan99"><label>Room code</label><input id="roomCode" placeholder="ABCD" maxlength="4"><button id="joinBtn" class="secondary">Join room</button></div>
+  </div>
+</section>
+<section id="game" class="hidden">
+  <div class="topline"><div><span class="muted">ROOM CODE</span><strong id="roomCodeLabel" class="room-code">----</strong></div><div id="roleLabel" class="pill">PLAYER</div></div>
+  <div class="game-grid">
+    <div class="maincol">
+      <div class="panel video-panel"><div class="section-head"><h2>Quiz video</h2><span id="questionLabel" class="pill">QUESTION 1</span></div><div class="video-wrap"><iframe id="yt" allow="autoplay; encrypted-media; picture-in-picture" allowfullscreen></iframe></div></div>
+      <div class="panel answer-panel" id="playerPanel"><h2>Your answer</h2><p class="muted" id="answerStatus">Submit one answer for the current question.</p><div class="answer-row"><input id="answerInput" placeholder="Type your answer..."><button id="submitBtn">Submit</button></div></div>
+      <div class="panel hidden" id="hostPanel"><h2>Host controls</h2><div class="controls"><div><label>Current question number</label><input id="questionInput" type="number" min="1" value="1"></div><button id="setQuestionBtn" class="secondary">Open question</button><button id="closeQuestionBtn" class="secondary">Close submissions</button></div><div class="divider"></div><label>Accepted correct answer(s) <span class="muted">(separate alternatives with |)</span></label><input id="correctInput" placeholder="e.g. Naruto Uzumaki|Naruto"><div class="controls points"><div><label>Points for correct answer</label><input id="pointsInput" type="number" min="0" value="10"></div><button id="setKeyBtn">Set answer key / score</button><button id="finishBtn" class="danger">Finish game & save</button></div><p class="tiny muted">Set the answer key before players submit for automatic scoring. If you add it later, existing answers are scored when you click “Set answer key / score”.</p></div>
+      <div class="panel"><div class="section-head"><h2>Answer history</h2><span class="muted tiny">Per-player submissions</span></div><div id="history" class="history"><p class="muted">Waiting for players...</p></div></div>
+    </div>
+    <aside class="panel leaderboard"><div class="section-head"><h2>Live leaderboard</h2><span class="live-dot">LIVE</span></div><div id="scores"></div><div class="divider"></div><h3>Players connected</h3><div id="players"></div></aside>
+  </div>
+</section>
+<section id="past" class="panel hidden"><div class="section-head"><h2>Saved game history</h2><button id="loadHistory" class="secondary small">Refresh</button></div><div id="pastGames" class="history"></div></section>
+<div id="toast" role="status"></div>
+</main>
+<footer>Anime Quiz Live · Private rooms · Scores saved on the host server</footer>
+<script src="/socket.io/socket.io.js"></script><script src="app.js"></script>
+</body></html>
